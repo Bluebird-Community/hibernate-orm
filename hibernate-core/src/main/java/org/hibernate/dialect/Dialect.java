@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -121,6 +122,8 @@ public abstract class Dialect {
 		// TODO: shouldn't SerializableToBlobType be in this list???
 	}
 
+	private static final Pattern ESCAPE_CLOSING_COMMENT_PATTERN = Pattern.compile( "\\*/" );
+	private static final Pattern ESCAPE_OPENING_COMMENT_PATTERN = Pattern.compile( "/\\*" );
 	private final TypeNames typeNames = new TypeNames();
 	private final TypeNames hibernateTypeNames = new TypeNames();
 
@@ -1652,6 +1655,14 @@ public abstract class Dialect {
 
 	public boolean supportsIfExistsAfterTableName() {
 		return false;
+	}
+
+	public static String escapeComment(String comment) {
+		if ( StringHelper.isNotEmpty( comment ) ) {
+			final String escaped = ESCAPE_CLOSING_COMMENT_PATTERN.matcher( comment ).replaceAll( "*\\\\/" );
+			return ESCAPE_OPENING_COMMENT_PATTERN.matcher( escaped ).replaceAll( "/\\\\*" );
+		}
+		return comment;
 	}
 
 	/**

@@ -237,9 +237,10 @@ public abstract class Loader {
 			return sql;
 		}
 		else {
+			String newcomment = Dialect.escapeComment( comment );
 			return new StringBuffer( comment.length() + sql.length() + 5 )
 					.append( "/* " )
-					.append( comment )
+					.append( newcomment )
 					.append( " */ " )
 					.append( sql )
 					.toString();
