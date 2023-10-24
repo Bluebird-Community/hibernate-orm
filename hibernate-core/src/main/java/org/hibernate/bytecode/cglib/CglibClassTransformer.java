@@ -80,7 +80,7 @@ public class CglibClassTransformer extends AbstractClassTransformerImpl {
 		}
 
 		String[] names = ClassNameReader.getClassInfo( reader );
-		ClassWriter w = new DebuggingClassWriter( ClassWriter.COMPUTE_MAXS  );
+		DebuggingClassWriter w = new DebuggingClassWriter( ClassWriter.COMPUTE_MAXS  );
 		ClassTransformer t = getClassTransformer( names );
 		if ( t != null ) {
 			if ( log.isDebugEnabled() ) {

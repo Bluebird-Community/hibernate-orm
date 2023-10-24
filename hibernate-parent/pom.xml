@@ -472,6 +472,7 @@
             <version>${slf4jVersion}</version>
             <scope>test</scope>
         </dependency>
+        <!--
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
@@ -484,6 +485,7 @@
             <version>99.0-does-not-exist</version>
             <scope>test</scope>
         </dependency>
+        -->
         <!-- / test-scoped dependencies for common testing dependencies -->
     </dependencies>
 
@@ -1057,4 +1059,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <bytemanVersion>1.5.1</bytemanVersion>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>jboss-releases</id>
+            <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>                        
+        </repository>
+    </repositories>
 </project>
