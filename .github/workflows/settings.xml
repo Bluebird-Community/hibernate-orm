@@ -1,0 +1,18 @@
+<!--
+    This file is required to force this repository to use bluebirdlabs nexus proxy and this via http,
+    as this project requies JDK 1.5 and 1.6, where we were not able to get it to work properly
+-->
+<settings>
+    <mirrors>
+        <mirror>
+            <id>mirror-opennms-snapshots</id>
+            <url>http://maven.bluebirdlabs.tech:8080/repository/bluebird-snapshots/</url>
+            <mirrorOf>opennms-snapshots</mirrorOf>
+        </mirror>
+        <mirror>
+            <id>mirror-opennms-everything</id>
+            <url>http://maven.bluebirdlabs.tech:8080/repository/everything/</url>
+            <mirrorOf>*</mirrorOf>
+        </mirror>
+    </mirrors>
+</settings>

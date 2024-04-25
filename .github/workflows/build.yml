@@ -1,0 +1,18 @@
+name: build and deploy
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  build_and_push:
+    name: Build and Push
+    runs-on: ubuntu-latest
+    container:
+      image: quay.io/bluebird/build-env:hibernate-orm-debian-bookworm-slim
+    env:
+      jdk16_home: '/opt/java/jdk1.6.0_45'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: |
+          mvn --settings .github/workflows/settings.xml clean package -DskipTests -DdisableDistribution=true
+          

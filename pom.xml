@@ -20,6 +20,8 @@
     <properties>
         <!-- Skip artifact deployment -->
         <maven.deploy.skip>true</maven.deploy.skip>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <modules>
