@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 jobs:
   build_and_push:
-    name: Build and Push
+    name: Build and Push to maven
     runs-on: ubuntu-latest
     container:
       image: quay.io/bluebird/build-env:hibernate-orm-debian-bookworm-slim
@@ -14,5 +14,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build
         run: |
-          mvn --settings .github/workflows/settings.xml clean package -DskipTests -DdisableDistribution=true
-          
+          mvn -B --settings .github/workflows/settings.xml clean install -DskipTests -DdisableDistribution=true
+      - name: Deploy to maven
+        env:
+          NEXUS_USER: ${{ secrets.NEXUS_USERNAME }}
+          NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+        if: github.ref_name == '3.6-2024'
+        working-directory: hibernate-core
+        run: |
+          mvn -B --settings ../.github/workflows/settings.xml \
+          -DaltDeploymentRepository=jboss-releases-repository::default::http://maven.bluebirdlabs.tech:8080/repository/bluebird-public \
+          deploy
